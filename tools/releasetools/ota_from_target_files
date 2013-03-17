@@ -412,21 +412,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   script.ShowProgress(0.5, 0)
 
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" BeanStalk Build ")
-  script.Print(" ")
-  script.Print(" Current OS JellyBean 4.2.2 ")
-  script.Print(" By Scott.hart.bti ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print("Installing the ROM...")
-
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
 
@@ -460,14 +445,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   script.ShowProgress(0.2, 10)
   script.WriteRawImage("/boot", "boot.img")
-
-  script.Print(" ")
-  script.Print("BeanStalk is installed.")
-  script.Print("Please flash Gapps now.");
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
-  script.Print(" ")
 
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
