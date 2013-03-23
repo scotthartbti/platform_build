@@ -66,9 +66,10 @@ endif
 
 TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
-TARGET_arm_CFLAGS :=    -O2 \
+TARGET_arm_CFLAGS :=    -Os \
                         -fomit-frame-pointer \
                         -fstrict-aliasing    \
+			-fno-zero-initialized-in-bss \
                         -funswitch-loops
 
 # Modules can choose to compile some source as thumb. As
