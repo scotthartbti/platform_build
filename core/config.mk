@@ -75,15 +75,10 @@ BUILD_MULTI_PREBUILT:= $(BUILD_SYSTEM)/multi_prebuilt.mk
 BUILD_JAVA_LIBRARY:= $(BUILD_SYSTEM)/java_library.mk
 BUILD_STATIC_JAVA_LIBRARY:= $(BUILD_SYSTEM)/static_java_library.mk
 BUILD_HOST_JAVA_LIBRARY:= $(BUILD_SYSTEM)/host_java_library.mk
+BUILD_DROIDDOC:= $(BUILD_SYSTEM)/droiddoc.mk
 BUILD_COPY_HEADERS := $(BUILD_SYSTEM)/copy_headers.mk
 BUILD_NATIVE_TEST := $(BUILD_SYSTEM)/native_test.mk
 BUILD_HOST_NATIVE_TEST := $(BUILD_SYSTEM)/host_native_test.mk
-
-ifneq ($(DISABLE_DROIDDOC),)
-BUILD_DROIDDOC:= $(BUILD_SYSTEM)/clear_vars.mk
-else
-BUILD_DROIDDOC:= $(BUILD_SYSTEM)/droiddoc.mk
-endif
 
 -include cts/build/config.mk
 
@@ -341,7 +336,7 @@ endif
 
 OLD_FLEX := prebuilts/misc/$(HOST_PREBUILT_TAG)/flex/flex-2.5.4a$(HOST_EXECUTABLE_SUFFIX)
 
-ifeq ($(HOST_OS),darwin)
+ifeq ($(BUILD_OS),darwin)
 # Mac OS' screwy version of java uses a non-standard directory layout
 # and doesn't even seem to have tools.jar.  On the other hand, javac seems
 # to be able to magically find the classes in there, wherever they are, so
