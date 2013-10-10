@@ -74,7 +74,7 @@ function check_product()
 
     if (echo -n $1 | grep -q -e "^cm_") ; then
        CM_BUILD=$(echo -n $1 | sed -e 's/^cm_//g')
-       export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | sha1sum | cut -c1-10)
+       export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
     else
        CM_BUILD=
     fi
@@ -695,13 +695,20 @@ function eat()
         adb root
         sleep 1
         adb wait-for-device
+        # CWM command
         cat << EOF > /tmp/command
 --sideload
 EOF
-        if adb push /tmp/command /cache/recovery/ ; then
+        # TWRP command
+        cat << EOF > /tmp/openrecoveryscript
+sideload
+EOF
+        if adb push /tmp/command /cache/recovery/ && adb push /tmp/openrecoveryscript /cache/recovery/; then
             echo "Rebooting into recovery for sideload installation"
             adb reboot recovery
+            adb kill-server
             adb wait-for-sideload
+            echo "Device back online, trying to sideload"
             adb sideload $ZIPPATH
         fi
         rm /tmp/command
