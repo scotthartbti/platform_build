@@ -472,7 +472,7 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Print("*|  _ \ / _ \/ _` | '_ \/ __| __/ _` | | |/ /*");
   script.Print("*| |_) |  __/ (_| | | | \__ \ || (_| | |   < *");
   script.Print("*|____/ \___|\__,_|_| |_|___/\__\__,_|_|_|\_\*");
-  script.Print("*						   *");
+  script.Print("*                                            *");
   script.Print("**********************************************");
 
   build = GetBuildProp("ro.build.date", OPTIONS.info_dict)
