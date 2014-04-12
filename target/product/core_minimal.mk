@@ -37,7 +37,6 @@ PRODUCT_PACKAGES += \
     com.android.media.remotedisplay.xml \
     drmserver \
     framework-res \
-    idmap \
     installd \
     ip \
     ip-up-vpn \
