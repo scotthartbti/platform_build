@@ -300,6 +300,11 @@ def BuildBootableImage(sourcedir, fs_config_file, info_dict=None):
   else:
     cmd = ["mkbootimg", "--kernel", os.path.join(sourcedir, "kernel")]
 
+    fn = os.path.join(sourcedir, "dt")
+    if os.access(fn, os.F_OK):
+      cmd.append("--dt")
+      cmd.append(fn)
+
     fn = os.path.join(sourcedir, "cmdline")
     if os.access(fn, os.F_OK):
       cmd.append("--cmdline")
@@ -502,6 +507,7 @@ def CheckSize(data, target, info_dict):
   mount_point = "/" + target
 
   if info_dict["fstab"]:
+    if mount_point == "/userdata_extra": mount_point = "/data"
     if mount_point == "/userdata": mount_point = "/data"
     p = info_dict["fstab"][mount_point]
     fs_type = p.fs_type
