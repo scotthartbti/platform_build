@@ -410,6 +410,10 @@ def MakeRecoveryPatch(input_tmp, output_zip, recovery_img, boot_img):
   recovery_type, recovery_device = common.GetTypeAndDevice("/recovery", OPTIONS.info_dict)
 
   sh = """#!/system/bin/sh
+if [ -f /system/etc/recovery-transform.sh ]; then
+  exec sh /system/etc/recovery-transform.sh %(recovery_size)d %(recovery_sha1)s %(boot_size)d %(boot_sha1)s
+fi
+
 if ! applypatch -c %(recovery_type)s:%(recovery_device)s:%(recovery_size)d:%(recovery_sha1)s; then
   log -t recovery "Installing new recovery image"
   applypatch %(bonus_args)s %(boot_type)s:%(boot_device)s:%(boot_size)d:%(boot_sha1)s %(recovery_type)s:%(recovery_device)s %(recovery_sha1)s %(recovery_size)d %(boot_sha1)s:/system/recovery-from-boot.p
@@ -552,8 +556,6 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
   boot_img = common.GetBootableImage("boot.img", "boot.img",
                                      OPTIONS.input_tmp, "BOOT")
   if not OPTIONS.no_separate_recovery:
-    recovery_img = common.GetBootableImage("recovery.img", "recovery.img",
-                                           OPTIONS.input_tmp, "RECOVERY")
     MakeRecoveryPatch(OPTIONS.input_tmp, output_zip, recovery_img, boot_img)
 
   Item.GetMetadata(input_zip)
@@ -625,7 +627,7 @@ def GetBuildProp(prop, info_dict):
   try:
     return info_dict.get("build.prop", {})[prop]
   except KeyError:
-    raise common.ExternalError("couldn't find %s in build.prop" % (property,))
+    raise common.ExternalError("couldn't find %s in build.prop" % (prop,))
 
 def AddToKnownPaths(filename, known_paths):
   if filename[-1] == "/":
