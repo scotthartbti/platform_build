@@ -64,7 +64,7 @@ endif # CALLED_FROM_SETUP
 
 ifneq ($(PRINT_BUILD_CONFIG),)
 HOST_OS_EXTRA:=$(shell python -c "import platform; print(platform.platform())")
-$(info ============================================)
+$(info =====================================================================)
 $(info   PLATFORM_VERSION_CODENAME=$(PLATFORM_VERSION_CODENAME))
 $(info   PLATFORM_VERSION=$(PLATFORM_VERSION))
 $(info   CM_VERSION=$(CM_VERSION))
@@ -88,5 +88,6 @@ ifeq ($(CYNGN_TARGET),true)
 $(info   CYNGN_TARGET=$(CYNGN_TARGET))
 $(info   CYNGN_FEATURES=$(CYNGN_FEATURES))
 endif
-$(info ============================================)
+$(info =====================================================================)
+include $(BUILD_SYSTEM)/sabermod/dumpvar.mk
 endif
