@@ -1,3 +1,4 @@
+ifneq ($(strip $(USE_SABER_INLINE_KERNEL_BUILDING)),true)
 # Copyright (C) 2012 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -278,4 +279,5 @@ $(file) : $(KERNEL_BIN) | $(ACP)
 	$(transform-prebuilt-to-target)
 
 ALL_PREBUILT += $(INSTALLED_KERNEL_TARGET)
+endif
 endif

@@ -16,7 +16,11 @@ CLANG_CONFIG_arm64_UNKNOWN_CFLAGS := \
   -frename-registers \
   -fno-strict-volatile-bitfields \
   -fno-align-jumps \
-  -Wa,--noexecstack
+  -Wa,--noexecstack 
+
+ifeq ($(strip $(USE_OPTIMIZATIONS)),true)
+CLANG_CONFIG_arm_UNKNOWN_CFLAGS += -mfpu=neon-vfpv4
+endif
 
 # We don't have any arm64 flags to substitute yet.
 define subst-clang-incompatible-arm64-flags
