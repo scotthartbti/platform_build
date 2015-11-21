@@ -678,8 +678,29 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Unmount("/data")
     script.AppendExtra("endif;")
 
+  script.Print("**********************************************");
+  script.Print("* ____                       _        _ _    *");
+  script.Print("*| __ )  ___  __ _ _ __  ___| |_ __ _| | | __*");
+  script.Print("*|  _ \ / _ \/ _` | '_ \/ __| __/ _` | | |/ /*");
+  script.Print("*| |_) |  __/ (_| | | | \__ \ || (_| | |   < *");
+  script.Print("*|____/ \___|\__,_|_| |_|___/\__\__,_|_|_|\_\*");
+  script.Print("*                                            *");
+  script.Print("**********************************************");
+
+  build = GetBuildProp("ro.build.date", OPTIONS.info_dict)
+  script.Print("******************************************");
+  script.Print("************  BEANSTALK ROM  *************");
+  script.Print("******************************************");
+  script.Print("*   Compiled: %s"%(build));
+
+  device = GetBuildProp("ro.product.device", OPTIONS.info_dict)
+  model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
+  script.Print("*   Device: %s (%s)"%(model, device));
+  script.Print("******************************************");
+
   # Place a copy of file_contexts.bin into the OTA package which will be used
   # by the recovery program.
+
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
