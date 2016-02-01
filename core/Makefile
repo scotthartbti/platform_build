@@ -1918,6 +1918,13 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(BS_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(BS_TARGET_PACKAGE) > $(BS_TARGET_PACKAGE).md5sum
+	@echo -e ${CL_GRN}"███   ▄███▄   ██      ▄      ▄▄▄▄▄      ▄▄▄▄▀ ██   █    █  █▀"${CL_GRN}
+	@echo -e ${CL_GRN}"█  █  █▀   ▀  █ █      █    █     ▀▄ ▀▀▀ █    █ █  █    █▄█   "${CL_GRN}
+	@echo -e ${CL_GRN}"█ ▀ ▄ ██▄▄    █▄▄█ ██   █ ▄  ▀▀▀▀▄       █    █▄▄█ █    █▀▄ "${CL_GRN}
+	@echo -e ${CL_GRN}"█  ▄▀ █▄   ▄▀ █  █ █ █  █  ▀▄▄▄▄▀       █     █  █ ███▄ █  █ "${CL_GRN}
+	@echo -e ${CL_GRN}"███   ▀███▀      █ █  █ █              ▀         █     ▀  █   "${CL_GRN}
+	@echo -e ${CL_GRN}"                █  █   ██                       █        ▀    "${CL_GRN}
+	@echo -e ${CL_GRN}"               ▀                               ▀              "${CL_GRN}
 	@echo -e ${CL_CYN}"Package Complete: $(BS_TARGET_PACKAGE)"${CL_RST}
 
 # -----------------------------------------------------------------
