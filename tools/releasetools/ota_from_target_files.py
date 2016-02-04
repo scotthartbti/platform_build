@@ -651,7 +651,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("*|  _ \ / _ \/ _` | '_ \/ __| __/ _` | | |/ /*");
   script.Print("*| |_) |  __/ (_| | | | \__ \ || (_| | |   < *");
   script.Print("*|____/ \___|\__,_|_| |_|___/\__\__,_|_|_|\_\*");
-  script.Print("*					     *");
+  script.Print("*                                            *");
   script.Print("**********************************************");
 
   build = GetBuildProp("ro.build.date", OPTIONS.info_dict)
