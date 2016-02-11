@@ -1232,6 +1232,11 @@ endef
 $(BUILT_SYSTEMIMAGE): $(FULL_SYSTEMIMAGE_DEPS) $(INSTALLED_FILES_FILE)
 	$(call build-systemimage-target,$@)
 
+ifndef I_WANT_A_QUAIL_STAR
+$(BUILT_SYSTEMIMAGE): checkapi
+$(BUILT_SYSTEMIMAGE): checkapi-cm
+endif
+
 INSTALLED_SYSTEMIMAGE := $(PRODUCT_OUT)/system.img
 SYSTEMIMAGE_SOURCE_DIR := $(TARGET_OUT)
 
@@ -2257,8 +2262,6 @@ include $(sort $(wildcard $(BUILD_SYSTEM)/tasks/*.mk))
 # Also the project-specific tasks
 -include $(sort $(wildcard vendor/*/*/build/tasks/*.mk))
 -include $(sort $(wildcard device/*/*/build/tasks/*.mk))
-# Include any vendor specific apicheck.mk file
--include $(TOPDIR)vendor/*/build/core/apicheck.mk
 endif
 
 # -----------------------------------------------------------------
