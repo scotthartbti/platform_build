@@ -107,6 +107,8 @@ def BuildVerityTree(sparse_image_path, verity_image_path, prop_dict):
 def BuildVerityMetadata(image_size, verity_metadata_path, root_hash, salt,
                         block_device, signer_path, key):
   verity_key = os.getenv("PRODUCT_VERITY_KEY", None)
+  verity_key_password = None
+
   if verity_key and os.path.exists(verity_key+".pk8"):
     verity_key_passwords = {}
     verity_key_passwords.update(common.PasswordManager().GetPasswords(verity_key.split()))

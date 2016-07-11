@@ -481,6 +481,8 @@ def BuildBootableImage(sourcedir, fs_config_file, info_dict=None):
     cmd.extend([path, img.name,
                 info_dict["verity_key"] + ".pk8",
                 info_dict["verity_key"] + ".x509.pem", img.name])
+    verity_key_password = None
+
     if verity_key and os.path.exists(verity_key+".pk8") and kernel_pagesize > 0:
       verity_key_passwords = {}
       verity_key_passwords.update(PasswordManager().GetPasswords(verity_key.split()))
