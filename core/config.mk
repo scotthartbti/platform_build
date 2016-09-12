@@ -189,7 +189,7 @@ FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(OUT_DIR) $(SCAN_EXCLUDE_DIRS) .r
 $(call project-set-path-variant,recovery,RECOVERY_VARIANT,bootable/recovery)
 
 -include vendor/extra/BoardConfigExtra.mk
--include vendor/bs/config/BoardConfigCM.mk
+-include vendor/beanstalk/config/BoardConfigCM.mk
 
 # The build system exposes several variables for where to find the kernel
 # headers:
