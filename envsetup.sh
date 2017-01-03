@@ -134,7 +134,7 @@ function check_product()
 
     if (echo -n $1 | grep -q -e "^bs_") ; then
        BS_BUILD=$(echo -n $1 | sed -e 's/^bs_//g')
-       export BUILD_NUMBER=$((date +%s%N ; echo $BS_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
+       export BUILD_NUMBER=$( (date +%s%N ; echo $BS_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10 )
     else
        BS_BUILD=
     fi
@@ -626,13 +626,13 @@ function lunch()
         T=$(gettop)
         pushd $T > /dev/null
         vendor/beanstalk/build/tools/roomservice.py $product
-        popd > /dev/null
+        cd - > /dev/null
         check_product $product
     else
         T=$(gettop)
         pushd $T > /dev/null
         vendor/beanstalk/build/tools/roomservice.py $product true
-        popd > /dev/null
+        cd - > /dev/null
     fi
     TARGET_PRODUCT=$product \
     TARGET_BUILD_VARIANT=$variant \
