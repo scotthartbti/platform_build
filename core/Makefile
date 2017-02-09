@@ -2256,7 +2256,7 @@ BS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(BS_VERSION).zip
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(BS_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(BS_TARGET_PACKAGE) > $(BS_TARGET_PACKAGE).md5sum
+	$(hide) $(MD5SUM) $(BS_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(BS_TARGET_PACKAGE).md5sum
 	@echo  ""
 	@echo  ""
 	@echo -e ${CL_GRN}"███   ▄███▄   ██      ▄      ▄▄▄▄▄      ▄▄▄▄▀ ██   █    █  █▀"${CL_GRN}
