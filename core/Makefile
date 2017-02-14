@@ -2269,7 +2269,7 @@ bacon: otapackage
 	@echo -e ${CL_GRN}"███   ▀███▀      █ █  █ █              ▀         █     ▀  █   "${CL_GRN}
 	@echo -e ${CL_GRN}"                █  █   ██                       █        ▀    "${CL_GRN}
 	@echo -e ${CL_GRN}"               ▀                               ▀              "${CL_GRN}
-	@echo -e ${CL_CYN}"Package Complete: $(BS_TARGET_PACKAGE)"${CL_RST}
+	@echo -e ${CL_CYN}"Package Complete: $(BS_TARGET_PACKAGE)" >&2 ${CL_RST}
 
 endif    # build_ota_package
 # -----------------------------------------------------------------
