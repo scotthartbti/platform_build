@@ -2239,6 +2239,18 @@ ifneq ($(TARGET_UNIFIED_DEVICE),)
     endif
 endif
 
+ifeq ($(USE_SU),true)
+$(file > $(OUT_DIR)/target/common/with_su,true)
+else
+$(file > $(OUT_DIR)/target/common/with_su,false)
+endif
+
+ifeq ($(USE_SU),true)
+    WITH_SU := true
+else
+    WITH_SU := false
+endif
+
 ifneq ($(BLOCK_BASED_OTA),false)
     $(INTERNAL_OTA_PACKAGE_TARGET): block_based := --block
 endif
