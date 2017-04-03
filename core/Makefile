@@ -2239,6 +2239,12 @@ ifneq ($(TARGET_UNIFIED_DEVICE),)
     endif
 endif
 
+ifeq ($(USE_SU),true)
+$(file > $(ANDROID_BUILD_TOP)/out/target/common/with_su,true)
+else
+$(file > $(ANDROID_BUILD_TOP)/out/target/common/with_su,false)
+endif
+
 ifneq ($(BLOCK_BASED_OTA),false)
     $(INTERNAL_OTA_PACKAGE_TARGET): block_based := --block
 endif
