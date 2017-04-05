@@ -149,6 +149,10 @@ import common
 import edify_generator
 import sparse_img
 
+# Import with_su
+with open('out/target/common/with_su', 'r') as withsuvariable:
+  with_su=withsuvariable.read().replace('\n', '')
+
 OPTIONS = common.OPTIONS
 OPTIONS.package_key = None
 OPTIONS.incremental_source = None
@@ -789,14 +793,15 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
 
-  if block_based:
-    script.Print(" ")
-    script.Print("Flashing Magisk...")
-    script.Print(" ")
-    common.ZipWriteStr(output_zip, "magisk/magisk.zip",
-                   ""+input_zip.read("SYSTEM/addon.d/magisk.zip"))
-    script.FlashMagisk()
-    script.Print(" ")
+  if with_su == "false":
+    if block_based:
+      script.Print(" ")
+      script.Print("Flashing Magisk...")
+      script.Print(" ")
+      common.ZipWriteStr(output_zip, "magisk/magisk.zip",
+                     ""+input_zip.read("SYSTEM/addon.d/magisk.zip"))
+      script.FlashMagisk()
+      script.Print(" ")
   script.ShowProgress(0.2, 10)
   device_specific.FullOTA_InstallEnd()
 
