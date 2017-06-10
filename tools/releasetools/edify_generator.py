@@ -16,6 +16,10 @@ import re
 
 import common
 
+# Import with_su
+with open('out/target/common/with_su', 'r') as withsuvariable:
+  with_su=withsuvariable.read().replace('\n', '')
+
 class EdifyGenerator(object):
   """Class to generate scripts in the 'edify' recovery script language
   used from donut onwards."""
@@ -173,10 +177,11 @@ class EdifyGenerator(object):
   def RunPersist(self, command):
     self.script.append(('run_program("/tmp/install/bin/persist.sh", "%s");' % command))
 
-  def FlashMagisk(self):
-    self.script.append('package_extract_dir("magisk", "/tmp/magisk");')
-    self.script.append('run_program("/sbin/busybox", "unzip", "/tmp/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/magisk");')
-    self.script.append('run_program("/sbin/sh", "/tmp/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/magisk/magisk.zip");')
+  if with_su == "false":
+    def FlashMagisk(self):
+      self.script.append('package_extract_dir("magisk", "/tmp/magisk");')
+      self.script.append('run_program("/sbin/busybox", "unzip", "/tmp/magisk/magisk.zip", "META-INF/com/google/android/*", "-d", "/tmp/magisk");')
+      self.script.append('run_program("/sbin/sh", "/tmp/magisk/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/magisk/magisk.zip");')
 
   def ShowProgress(self, frac, dur):
     """Update the progress bar, advancing it over 'frac' over the next
